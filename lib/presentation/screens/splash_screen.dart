@@ -9,7 +9,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   void updateScreen() => setState(() {});
 
   @override
@@ -32,7 +31,31 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Column(
-
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedOpacity(
+              opacity: splashProvider.isStartLogoAnimation ? 1 : 0,
+              duration: Duration(seconds: 2),
+              child: Image.asset(
+                'assets/images/symbol.png',
+                width: 150,
+                height: 150,
+              ),
+            ),
+            SizedBox(height: 20),
+            AnimatedOpacity(
+              opacity: splashProvider.isStartTextAnimation ? 1 : 0,
+              duration: Duration(seconds: 2),
+              child: Text(
+                'MY Health DATA',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 26,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
