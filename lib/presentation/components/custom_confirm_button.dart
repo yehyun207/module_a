@@ -1,32 +1,37 @@
 import 'package:flutter/material.dart';
 
 class CustomConfirmButton extends StatelessWidget {
-  final String buttonTitle;
-  final Widget Function() pageBuilder;
+  final Function()? onTap;
+  final String text;
 
   const CustomConfirmButton({
     super.key,
-    required this.buttonTitle,
-    required this.pageBuilder,
+    required this.onTap,
+    required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => pageBuilder()));
+        if(onTap != null) {
+          onTap!();
+        }
       },
       child: Container(
-        width: 330,
+        width: 320,
         height: 50,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Color(0xff393939),
           borderRadius: BorderRadius.circular(14),
         ),
-        child: Center(
-          child: Text(
-            buttonTitle,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
