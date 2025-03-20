@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:module_a/presentation/providers/splash_provider.dart';
+import 'package:module_a/presenation/providers/splash_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       splashProvider.addListener(updateScreen);
-      splashProvider.startAnimation(context);
+      splashProvider.animationStart(context);
     });
   }
 
@@ -34,24 +34,20 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedOpacity(
-              opacity: splashProvider.isStartLogoAnimation ? 1 : 0,
-              duration: Duration(seconds: 2),
-              child: Image.asset(
-                'assets/images/symbol.png',
-                width: 150,
-                height: 150,
-              ),
+              opacity: splashProvider.isLogoStart ? 1 : 0,
+              duration: Duration(seconds: 1),
+              child: Image.asset('assets/images/symbol.png'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             AnimatedOpacity(
-              opacity: splashProvider.isStartTextAnimation ? 1 : 0,
-              duration: Duration(seconds: 2),
+              opacity: splashProvider.isTextStart ? 1 : 0,
+              duration: Duration(seconds: 1),
               child: Text(
                 'MY Health DATA',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
                   color: Colors.black,
-                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
                 ),
               ),
             ),

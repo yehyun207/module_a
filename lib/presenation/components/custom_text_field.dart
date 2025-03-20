@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CustomTextfield extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
+
   final IconData iconData;
   final String hintText;
   final controller;
-  const CustomTextfield({super.key, required this.iconData, required this.hintText, this.controller});
+
+  const CustomTextField({super.key,required this.iconData, required this.hintText, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 25, left: 25),
+      padding: const EdgeInsets.only(left: 25, right: 25),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
@@ -18,13 +20,11 @@ class CustomTextfield extends StatelessWidget {
           hintStyle: TextStyle(
             color: Color(0xff9E9E9E)
           ),
-          fillColor: Color(0xffFAFAFA),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: BorderSide.none
+            borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide.none,
+            borderSide: BorderSide.none
           )
         ),
       ),

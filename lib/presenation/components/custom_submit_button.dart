@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomConfirmButton extends StatelessWidget {
-  final Function()? onTap;
+class CustomSubmitButton extends StatelessWidget {
   final String text;
-
-  const CustomConfirmButton({
+  final Function()? onTap;
+  const CustomSubmitButton({
     super.key,
-    required this.onTap,
-    required this.text,
+    required this.text, required this.onTap,
+
   });
 
   @override
@@ -30,7 +29,7 @@ class CustomConfirmButton extends StatelessWidget {
           text,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
