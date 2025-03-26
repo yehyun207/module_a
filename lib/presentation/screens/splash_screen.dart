@@ -42,6 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 'assets/icons/symbol.png',
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             AnimatedOpacity(opacity: splashProvider.isTextStart ? 1 : 0, duration: Duration(seconds: 1),
             child: Text(
               'MY Health DATA',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:module_a_time/data/repositories/auth_repository.dart';
 import 'package:module_a_time/presentation/components/custom_black_button.dart';
+import 'package:module_a_time/presentation/components/custom_secure_text_field.dart';
 import 'package:module_a_time/presentation/components/custom_submit_button.dart';
 import 'package:module_a_time/presentation/components/custom_text_field.dart';
 import 'package:module_a_time/presentation/components/custom_white_button.dart';
@@ -19,16 +20,25 @@ class _SignInScreenState extends State<SignInScreen> {
 
     final AuthRepository authRepository = AuthRepository();
 
-    if(_idController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('이름은 필수 입니다.')));
+    if(_idController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('모든 항목은 필수 입니다.')));
+      return;
     }
 
     if(_idController.text.length < 4) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('이름은 4글자 이상이어야 합니다.')));
+      return;
+    }
+
+    if (_idController.text.contains(' ')) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('이름에 공백은 허용되지 않습니다.')));
+      return;
     }
 
     if(_passwordController.text.length < 4) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('비밀번호는 4글자 이상이어야 합니다.')));
+      return;
     }
 
     await authRepository.signIn(_idController.text, _passwordController.text, context);
@@ -71,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: TextStyle(
                   color: Colors.grey,
                   fontFamily: 'NotoSans',
-                  fontWeight: FontWeight.w200,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(
@@ -81,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(
                 height: 10,
               ),
-              CustomTextField(icon: Icons.lock, text: 'Password', controller: _passwordController,),
+              CustomSecureTextField(icon: Icons.lock, text: 'Password' , controller: _passwordController,),
               SizedBox(
                 height: 30,
               ),

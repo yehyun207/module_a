@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../presentation/screens/main_screen.dart';
 import '../../presentation/screens/profile_target_screen.dart';
 
@@ -24,6 +25,14 @@ class AuthRepository {
     );
 
     if(response.statusCode == 200) {
+
+      final responseData = jsonDecode(response.body);
+
+      String tkn = responseData['tkn'];
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('accessToken', tkn);
+
       Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
     }
   }
@@ -42,7 +51,7 @@ class AuthRepository {
     );
 
     if(response.statusCode == 200) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileTargetScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfileTargetScreen()));
     }
   }
 }
